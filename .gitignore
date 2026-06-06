@@ -17,3 +17,6 @@ wheels/
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
+
+# Local presentation drafts, not part of the product
+presentations/
