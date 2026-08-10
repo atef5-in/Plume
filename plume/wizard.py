@@ -46,7 +46,7 @@ class FirstRunWizard:
         # Persistent draft values so navigating Retour/Commencer doesn't wipe input.
         self._draft_url = "http://148.230.93.60:4000"
         self._draft_key = ""
-        self._draft_model = "ministral-3:8b-cloud"
+        self._draft_model = "gpt-oss:120b"
 
         self._win = ctk.CTkToplevel(root)
         self._win.title("Plume — Configuration initiale")

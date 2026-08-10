@@ -41,8 +41,14 @@ plume/
 ## LLM endpoint
 
 - Base URL: `http://148.230.93.60:4000` (internal LiteLLM proxy)
-- Default model: `ministral-3:8b-cloud`
-- Avoid: large subscription-only models (mistral 675B, deepseek 671B), proprietary `gemini-3-flash-preview`
+- Default model: `gpt-oss:120b`
+- The proxy fronts Ollama Cloud, and **that catalogue rotates**. Retired names return `410 Gone`;
+  models above the account's tier fail with "requires a subscription". Both break Plume silently at
+  the first call, so don't trust a model name found in this repo — re-check before relying on it.
+- **Only a real completion proves a model is usable.** `/api/show` returns OK for models the account
+  cannot actually call, so an existence check is not enough — send a short `chat/completions` and
+  look at the response.
+- Prefer the `gpt-oss:*` line: it is on the free tier and has survived every catalogue rotation so far.
 
 ## Config files (runtime)
 
