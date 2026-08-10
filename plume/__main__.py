@@ -10,7 +10,7 @@ from plume.config import CONFIG_DIR, Config, ConfigError, load_config, save_conf
 from plume.fixer import FixerError, fix_text
 
 _DEFAULT_BASE_URL = "http://148.230.93.60:4000"
-_DEFAULT_MODEL = "mistral-large-3:675b-cloud"
+_DEFAULT_MODEL = "gpt-oss:120b"
 
 
 def cmd_init(_args: argparse.Namespace) -> None:
