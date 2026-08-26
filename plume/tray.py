@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 import threading
 from collections.abc import Callable
 from typing import TYPE_CHECKING
@@ -79,6 +80,14 @@ class TrayIcon:
         self._icon: _pystray.Icon | None = None
 
     def start(self) -> None:
+        if sys.platform == "darwin":
+            # pystray's Darwin backend calls -[NSApplication run]. AppKit must own
+            # the main thread, and Tk's mainloop already has it here. macOS 26 turns
+            # that violation into a SIGTRAP ("NSUpdateCycleInitialize() is called off
+            # the main thread") — a native trap, so the except below cannot catch it
+            # and the whole process dies before the widget ever appears.
+            # The tray is optional by design; skip it and keep widget + hotkey.
+            return
         try:
             import pystray
 
